@@ -476,7 +476,8 @@ input#deslizador::-ms-tooltip {
             </div>
             <div class="form-group">
                 <label for="mensaje">Mensaje</label>
-                <textarea class="form-control" id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí" required></textarea>
+                <textarea class="form-control" id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí" required maxlength="2000"></textarea>
+                <small id="charCount" class="form-text text-muted">Caracteres restantes: 2000</small>
             </div>
             <!-- Spinner oculto -->
             <div id="spinner" class="text-center" style="display: none;">
@@ -508,49 +509,67 @@ input#deslizador::-ms-tooltip {
         function beforeAfter() {
   document.getElementById('separador').style.width = document.getElementById('deslizador').value + "%";
 }
-        $(document).ready(function() {
-        // Manejar el envío del formulario
-        $('#contactForm').on('submit', function(event) {
-            event.preventDefault(); // Evitar el envío tradicional del formulario
+$(document).ready(function() {
+    // Actualizar el contador de caracteres
+    var maxChars = 2000;
+    $('#mensaje').on('input', function() {
+        var chars = $(this).val().length;
+        var charsLeft = maxChars - chars;
+        $('#charCount').text('Caracteres restantes: ' + charsLeft);
+    });
 
-            // Mostrar el spinner
-            $('#spinner').show();
-            // Ocultar el botón de enviar
-            $(this).find('button[type="submit"]').attr('disabled', true);
+    // Manejar el envío del formulario
+    $('#contactForm').on('submit', function(event) {
+        event.preventDefault(); // Evitar el envío tradicional del formulario
 
-            // Obtener los datos del formulario
-            var formData = {
-                'nombre': $('#nombre').val(),
-                'correo': $('#correo').val(),
-                'mensaje': $('#mensaje').val()
-            };
+        // Validar la longitud del mensaje
+        var mensajeLength = $('#mensaje').val().length;
+        if (mensajeLength > maxChars) {
+            $('#formMessage').html('<div class="alert alert-danger">El mensaje excede el límite de ' + maxChars + ' caracteres.</div>');
+            return;
+        }
 
-            // Enviar los datos mediante AJAX
-            $.ajax({
-                url: 'https://noticiasaldia.es/wp-json/cmr-pinturas/v1/enviar-formulario/', // Reemplaza con tu URL
-                method: 'POST',
-                data: formData,
-                success: function(response) {
-                    // Ocultar el spinner
-                    $('#spinner').hide();
-                    // Mostrar mensaje de éxito
-                    $('#formMessage').html('<div class="alert alert-success">¡Formulario enviado! Nos pondremos en contacto contigo pronto.</div>');
-                    // Limpiar el formulario
-                    $('#contactForm')[0].reset();
-                    // Habilitar el botón de enviar
-                    $('#contactForm').find('button[type="submit"]').attr('disabled', false);
-                },
-                error: function(xhr) {
-                    // Ocultar el spinner
-                    $('#spinner').hide();
-                    // Mostrar mensaje de error
-                    $('#formMessage').html('<div class="alert alert-danger">Hubo un problema al enviar el formulario. Por favor, intenta nuevamente.</div>');
-                    // Habilitar el botón de enviar
-                    $('#contactForm').find('button[type="submit"]').attr('disabled', false);
-                }
-            });
+        // Mostrar el spinner
+        $('#spinner').show();
+        // Ocultar el botón de enviar
+        $(this).find('button[type="submit"]').attr('disabled', true);
+
+        // Obtener los datos del formulario
+        var formData = {
+            'nombre': $('#nombre').val(),
+            'correo': $('#correo').val(),
+            'mensaje': $('#mensaje').val()
+        };
+
+        // Enviar los datos mediante AJAX
+        $.ajax({
+            url: 'https://noticiasaldia.es/wp-json/cmr-pinturas/v1/enviar-formulario/', // Reemplaza con tu URL
+            method: 'POST',
+            data: formData,
+            success: function(response) {
+                // Ocultar el spinner
+                $('#spinner').hide();
+                // Mostrar mensaje de éxito
+                $('#formMessage').html('<div class="alert alert-success">¡Formulario enviado! Nos pondremos en contacto contigo pronto.</div>');
+                // Limpiar el formulario
+                $('#contactForm')[0].reset();
+                // Restablecer el contador de caracteres
+                $('#charCount').text('Caracteres restantes: ' + maxChars);
+                // Habilitar el botón de enviar
+                $('#contactForm').find('button[type="submit"]').attr('disabled', false);
+            },
+            error: function(xhr) {
+                // Ocultar el spinner
+                $('#spinner').hide();
+                // Mostrar mensaje de error
+                $('#formMessage').html('<div class="alert alert-danger">Hubo un problema al enviar el formulario. Por favor, intenta nuevamente.</div>');
+                // Habilitar el botón de enviar
+                $('#contactForm').find('button[type="submit"]').attr('disabled', false);
+            }
         });
     });
+});
+
         $(window).scroll(function() {
             if ($(this).scrollTop() > 50) {
                 $('.navbar').addClass('scrolled');
