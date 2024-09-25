@@ -108,9 +108,7 @@
 
     <!-- Sección de video de fondo -->
     <section class="hero-section">
-        <video autoplay muted loop>
-            <source src="video-de-pintura.mp4" type="video/mp4">
-        </video>
+        <img src="banner2.jpg">
         <div class="hero-content">
             <h1>Transforma tu Hogar con Nuestros Expertos</h1>
             <p>Servicios de pintura y decoración profesional</p>
@@ -294,28 +292,34 @@
     </section>
 
     <!-- Sección de Contacto -->
-    <section id="contacto" class="section">
-        <div class="container">
-            <h2 class="section-title">Contáctanos</h2>
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" placeholder="Tu nombre">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="correo">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="correo" placeholder="Tu correo electrónico">
-                    </div>
+    <!-- Sección de Contacto -->
+<section id="contacto" class="section">
+    <div class="container">
+        <h2 class="section-title">Contáctanos</h2>
+        <form action="https://formsubmit.co/rafael154c@gmail.com" method="POST">
+            <!-- Campos ocultos opcionales -->
+            <input type="hidden" name="_next" value="https://cmrpinturas.ayudantedigital.es/">
+            <input type="hidden" name="_captcha" value="false">
+            <!-- Fin de campos ocultos -->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="Nombre" placeholder="Tu nombre" required>
                 </div>
-                <div class="form-group">
-                    <label for="mensaje">Mensaje</label>
-                    <textarea class="form-control" id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí"></textarea>
+                <div class="form-group col-md-6">
+                    <label for="correo">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="correo" name="Correo Electrónico" placeholder="Tu correo electrónico" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
-            </form>
-        </div>
-    </section>
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea class="form-control" id="mensaje" name="Mensaje" rows="5" placeholder="Escribe tu mensaje aquí" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+        </form>
+    </div>
+</section>
+
 
     <!-- Footer -->
     <footer class="footer">
