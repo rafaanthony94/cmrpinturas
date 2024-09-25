@@ -476,8 +476,8 @@ input#deslizador::-ms-tooltip {
             </div>
             <div class="form-group">
                 <label for="mensaje">Mensaje</label>
-                <textarea class="form-control" id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí" required maxlength="2000"></textarea>
-                <small id="charCount" class="form-text text-muted">Caracteres restantes: 2000</small>
+                <textarea class="form-control" id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí" required maxlength="500"></textarea>
+                <small id="charCount" class="form-text text-muted">Caracteres restantes: 500</small>
             </div>
             <!-- Spinner oculto -->
             <div id="spinner" class="text-center" style="display: none;">
@@ -511,7 +511,7 @@ input#deslizador::-ms-tooltip {
 }
 $(document).ready(function() {
     // Actualizar el contador de caracteres
-    var maxChars = 2000;
+    var maxChars = 500;
     $('#mensaje').on('input', function() {
         var chars = $(this).val().length;
         var charsLeft = maxChars - chars;
