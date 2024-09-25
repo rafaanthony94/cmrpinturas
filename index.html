@@ -208,10 +208,39 @@ input#deslizador::-ms-tooltip {
   50% {width: 80%; }
   100% {width: 50%; }
 }
+/* Estilos para el botón flotante de WhatsApp */
+.whatsapp-button {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    right: 20px;
+    bottom: 20px;
+    z-index: 100;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.whatsapp-button:hover {
+    background-color: #20b358;
+    color: #fff;
+}
+
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
 </head>
 <body>
-
+    <a href="https://wa.me/34600823259?text=Me%20gustaría%20recibir%20información%20sobre%20" class="whatsapp-button" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
     <!-- Header flotante -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
