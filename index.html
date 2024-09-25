@@ -85,9 +85,26 @@
             padding: 20px 0;
             text-align: center;
         }
+        body {
+  background-color: black;
+}
+
+img {
+  display: none;
+  width: 40px;
+  z-index: -1;
+  position: fixed;
+  transform: translateX(-20px) translateY(-20px);
+}
+
     </style>
 </head>
 <body>
+    <img class="red myimg" src="http://www.clker.com/cliparts/0/f/1/f/130267960774173786paint-splash(red)-md.png" alt="image not supported">
+
+    <img class="blue myimg" src="http://www.clker.com/cliparts/Q/3/H/u/Z/K/dark-blue-splash-ink-hi.png" alt="image not supported">
+
+    <img class="yellow myimg" src="http://www.clker.com/cliparts/3/y/m/m/p/P/yellow-splash-ink-md.png" alt="image not supported">
 
     <!-- Header flotante -->
     <nav class="navbar navbar-expand-lg fixed-top">
@@ -337,6 +354,26 @@
                 $('.navbar').removeClass('scrolled');
             }
         });
+        $(document).ready(function(){
+            var red = $(".red");
+            var blue = $(".blue");
+            var yellow = $(".yellow");
+            var images = [red, blue, yellow];
+            
+            $(document).on("click", function() {
+            $(images[(Math.floor(Math.random()*3))]).show(0, function() {
+                $(this).fadeOut();
+                });
+            }); 
+            
+            $(document).mousemove(function(e){
+                $('.myimg').css('left',e.pageX+"px");
+            $('.myimg').css('top',e.pageY+"px");
+            });
+            
+            })
+
+
     </script>
 </body>
 </html>
