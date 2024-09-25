@@ -344,18 +344,13 @@
         </div>
     </section>
     <section id="antes-despues" class="section">
-        <div class="container">
-            <h2 class="section-title">Transformaciones Increíbles</h2>
-            <div class="before-after-container">
-                <div class="before-image">
-                    <img src="CMRPinturas-4-antes.PNG" alt="Antes">
-                </div>
-                <div class="after-image">
-                    <img src="CMRPinturas-4-despues.PNG" alt="Después">
-                </div>
-                <div class="slider">
-                    <input type="range" min="0" max="100" value="50" id="slider" />
-                </div>
+        <div class="before_after_slider" style="position: relative; width: 800px; height: 450px; margin: auto;">
+            <div class="img_after" style="position: absolute; width: 100%;">
+                <img src="CMRPinturas-4-antes.PNG" width="800" height="450" alt="" />
+            </div>
+        
+            <div class="img_before" style="position: absolute; overflow: hidden; border-right: solid 4px #FFF;">
+                <img src="CMRPinturas-4-despues.PNG" width="800" height="450" alt="" />
             </div>
         </div>
     </section>
@@ -471,7 +466,12 @@
             adjustImages();
         });
     </script>
-    
+    <script type="text/javascript">
+        //<![CDATA[
+        // JS BEFORE & AFTER SLIDE Nº1
+        jQuery.noConflict(),jQuery(document).ready(function(){var a=jQuery(".img_before"),b=jQuery(".img_before img").width(),c=Math.round(b/2);a.width(c),jQuery(".before_after_slider").mousemove(function(b){var c=b.offsetX||b.clientX-jQueryimg_after.offset().left;a.width(c)}),jQuery(".before_after_slider").mouseleave(function(b){a.stop().animate({width:c},1e3)})});
+        //]]>
+        </script>
     <!-- Scripts de JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- Popper.js -->
