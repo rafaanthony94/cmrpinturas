@@ -85,6 +85,129 @@
             padding: 20px 0;
             text-align: center;
         }
+        #contenedor { 
+  background:url(https://cdn.josetxu.com/img/before-after-effect-bg.jpg) no-repeat center center; /*fondo*/
+	height: 73.5vw;
+	margin: 1vw auto;
+	max-height: 750px;
+	max-width: 1000px;
+	overflow: hidden;
+	width: 98vw;
+}
+#contenedor figure { 
+	background-image: url(https://cdn.josetxu.com/img/before-after-effect-01.jpg);
+	background-size: cover;
+	font-size: 0;
+	height: 100%;
+	margin: 0; 
+	position: relative;
+	width: 100%; 
+}
+
+#separador {
+	background-image: url(https://cdn.josetxu.com/img/before-after-effect-02.jpg);
+	background-size: cover;
+	bottom: 0;
+	border-right: 5px solid rgba(255,255,255,0.7);
+	box-shadow: 10px 0 15px -13px #000;
+	height: 100%;
+	max-width: 98.6%;
+	min-width: 0.6%;
+	overflow: visible;
+	position: absolute;
+	width: 50%; 
+	animation: figure 2s 1 normal ease-in-out 0.1s; 
+	-webkit-animation: figure 2s 1 normal ease-in-out 0.1s; 
+}
+
+/*barra input */
+input#deslizador {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	border: none; 
+	background: transparent;
+	cursor: col-resize;
+	height: 100vw;
+	left: 0;
+	margin: 0;
+	outline: none; 
+	padding: 0;
+	position: relative;
+	top: -100vw;
+	width: 100%;
+}
+/*barra input mozilla*/
+input#deslizador::-moz-range-track { 
+	background: transparent; 
+}
+/*barra input ie*/
+input#deslizador::-ms-track {
+	border: none; 
+	background-color: transparent;
+	height: 100vw; 
+	left: 0; 
+	outline: none; 
+	position: relative;
+	top: -100vw; 
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	cursor: col-resize;
+	color:transparent;
+}
+input#deslizador::-ms-fill-lower {
+	background-color:transparent;
+}
+
+/*boton input chrome*/
+input#deslizador::-webkit-slider-thumb {
+	-webkit-appearance:none;
+	height: 100vw;
+	width: 0.5%;
+	opacity: 0;
+}
+/*boton input mozilla*/
+input#deslizador::-moz-range-thumb {
+	-moz-appearance: none;
+	height: 100vw;
+	width: 0.5%;
+	opacity: 0;
+}   
+/*boton input ie*/
+input#deslizador::-ms-thumb {
+	height: 100vw;
+	width: 0.5%; 
+	opacity:0;
+}
+input#deslizador::-ms-tooltip {
+	display:none;
+}
+
+/*flechas*/
+#separador::before {
+	background: url(https://cdn.josetxu.com/img/before-after-effect-arrows.png) no-repeat scroll 0 center transparent;
+	background-size:contain;
+	content: " ";
+	float: right;
+	height: 100%;
+	margin-right: -34px;
+	position: relative;
+	top:0;
+	width: 64px;
+}
+		
+/*animacion*/
+@keyframes figure {
+  0% {width: 0%; }
+  50% {width: 80%; }
+  100% {width: 50%; }
+}
+/*animacion chrome*/
+@-webkit-keyframes figure {
+  0% {width: 0%; }
+  50% {width: 80%; }
+  100% {width: 50%; }
+}
     </style>
 </head>
 <body>
@@ -237,24 +360,13 @@
         </div>
     </section>
     <section id="antes-despues" class="section">
-        <div class="before_after_slider" style="position: relative; width: 800px; height: 450px; margin: auto;">
-            <div class="img_after" style="position: absolute; width: 100%;">
-                <img src="https://url-de-tu-imagen-después.jpg" width="800" height="450" alt="" />
-            </div>
-        
-            <div class="img_before" style="position: absolute; overflow: hidden; border-right: solid 4px #FFF;">
-                <img src="https://url-de-tu-imagen-antes.jpg" width="800" height="450" alt="" />
-            </div>
-        </div>
+        <div id="contenedor">
+            <figure>
+              <div id="separador"></div>
+            </figure>
+            <input oninput="beforeAfter()" onchange="beforeAfter()" type="range" min="0" max="100" value="50" id="deslizador" />
+          </div>
 </section>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript">
-</script>
-<script type="text/javascript">
-    //<![CDATA[
-    // JS BEFORE & AFTER SLIDE Nº1
-    jQuery.noConflict(),jQuery(document).ready(function(){var a=jQuery(".img_before"),b=jQuery(".img_before img").width(),c=Math.round(b/2);a.width(c),jQuery(".before_after_slider").mousemove(function(b){var c=b.offsetX||b.clientX-jQueryimg_after.offset().left;a.width(c)}),jQuery(".before_after_slider").mouseleave(function(b){a.stop().animate({width:c},1e3)})});
-    //]]>
-    </script>
     <!-- Sección de Preguntas Frecuentes -->
     <section id="faq" class="section bg-light">
         <div class="container">
@@ -358,6 +470,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Script para cambiar el fondo del navbar al hacer scroll -->
     <script>
+        function beforeAfter() {
+  document.getElementById('separador').style.width = document.getElementById('deslizador').value + "%";
+}
         $(document).ready(function() {
         // Manejar el envío del formulario
         $('#contactForm').on('submit', function(event) {
