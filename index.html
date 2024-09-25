@@ -277,9 +277,19 @@ input#deslizador::-ms-tooltip {
             </div>
         </div>
     </section>
-
+    <section id="antes-despues" class="section bg-light">
+        <div id="contenedor">
+            <h2 class="section-title">Transformaciones que hablan por sí solas</h2>
+            <p>Descubre el antes y el después de nuestros trabajos. Cada proyecto es una muestra de nuestra dedicación y pasión por el detalle.</p>
+            <figure>
+                <div id="separador"></div>
+            </figure>
+            <input oninput="beforeAfter()" onchange="beforeAfter()" type="range" min="0" max="100" value="50" id="deslizador" />
+        </div>
+    </section>
+    
     <!-- Sección de Reseñas -->
-    <section id="reseñas" class="section bg-light">
+    <section id="reseñas" class="section">
         <div class="container">
             <h2 class="section-title">¿Qué Dicen Nuestros Clientes?</h2>
             <div class="row">
@@ -334,7 +344,7 @@ input#deslizador::-ms-tooltip {
     </section>
 
     <!-- Sección "Por qué elegirnos" -->
-    <section id="porque-elegirnos" class="section">
+    <section id="porque-elegirnos" class="section bg-light">
         <div class="container">
             <h2 class="section-title">¿Por Qué Elegirnos?</h2>
             <div class="row">
@@ -359,16 +369,8 @@ input#deslizador::-ms-tooltip {
             </div>
         </div>
     </section>
-    <section id="antes-despues" class="section">
-        <div id="contenedor">
-            <figure>
-              <div id="separador"></div>
-            </figure>
-            <input oninput="beforeAfter()" onchange="beforeAfter()" type="range" min="0" max="100" value="50" id="deslizador" />
-          </div>
-</section>
     <!-- Sección de Preguntas Frecuentes -->
-    <section id="faq" class="section bg-light">
+    <section id="faq" class="section">
         <div class="container">
             <h2 class="section-title">Preguntas Frecuentes</h2>
             <div id="accordion">
@@ -424,7 +426,7 @@ input#deslizador::-ms-tooltip {
     <!-- Sección de Contacto -->
     <!-- Sección de Contacto -->
 <!-- Sección de Contacto -->
-<section id="contacto" class="section">
+<section id="contacto" class="section bg-light">
     <div class="container">
         <h2 class="section-title">Contáctanos</h2>
         <!-- Añadimos un id al formulario para seleccionarlo fácilmente -->
