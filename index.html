@@ -293,28 +293,34 @@
 
     <!-- Sección de Contacto -->
     <!-- Sección de Contacto -->
+<!-- Sección de Contacto -->
 <section id="contacto" class="section">
     <div class="container">
         <h2 class="section-title">Contáctanos</h2>
-        <form action="https://formsubmit.co/rafael154c@gmail.com" method="POST">
-            <!-- Campos ocultos opcionales -->
-            <input type="hidden" name="_next" value="https://cmrpinturas.ayudantedigital.es/">
-            <input type="hidden" name="_captcha" value="false">
-            <!-- Fin de campos ocultos -->
+        <!-- Añadimos un id al formulario para seleccionarlo fácilmente -->
+        <form id="contactForm">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="Nombre" placeholder="Tu nombre" required>
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Tu nombre" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="correo">Correo Electrónico</label>
-                    <input type="email" class="form-control" id="correo" name="Correo Electrónico" placeholder="Tu correo electrónico" required>
+                    <input type="email" class="form-control" id="correo" name="correo" placeholder="Tu correo electrónico" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="mensaje">Mensaje</label>
-                <textarea class="form-control" id="mensaje" name="Mensaje" rows="5" placeholder="Escribe tu mensaje aquí" required></textarea>
+                <textarea class="form-control" id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí" required></textarea>
             </div>
+            <!-- Spinner oculto -->
+            <div id="spinner" class="text-center" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Enviando...</span>
+                </div>
+            </div>
+            <!-- Mensaje de éxito/error -->
+            <div id="formMessage" class="mt-3"></div>
             <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
         </form>
     </div>
@@ -334,6 +340,49 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Script para cambiar el fondo del navbar al hacer scroll -->
     <script>
+        $(document).ready(function() {
+        // Manejar el envío del formulario
+        $('#contactForm').on('submit', function(event) {
+            event.preventDefault(); // Evitar el envío tradicional del formulario
+
+            // Mostrar el spinner
+            $('#spinner').show();
+            // Ocultar el botón de enviar
+            $(this).find('button[type="submit"]').attr('disabled', true);
+
+            // Obtener los datos del formulario
+            var formData = {
+                'nombre': $('#nombre').val(),
+                'correo': $('#correo').val(),
+                'mensaje': $('#mensaje').val()
+            };
+
+            // Enviar los datos mediante AJAX
+            $.ajax({
+                url: 'https://tu_dominio.com/wp-json/cmr-pinturas/v1/enviar-formulario/', // Reemplaza con tu URL
+                method: 'POST',
+                data: formData,
+                success: function(response) {
+                    // Ocultar el spinner
+                    $('#spinner').hide();
+                    // Mostrar mensaje de éxito
+                    $('#formMessage').html('<div class="alert alert-success">¡Formulario enviado! Nos pondremos en contacto contigo pronto.</div>');
+                    // Limpiar el formulario
+                    $('#contactForm')[0].reset();
+                    // Habilitar el botón de enviar
+                    $('#contactForm').find('button[type="submit"]').attr('disabled', false);
+                },
+                error: function(xhr) {
+                    // Ocultar el spinner
+                    $('#spinner').hide();
+                    // Mostrar mensaje de error
+                    $('#formMessage').html('<div class="alert alert-danger">Hubo un problema al enviar el formulario. Por favor, intenta nuevamente.</div>');
+                    // Habilitar el botón de enviar
+                    $('#contactForm').find('button[type="submit"]').attr('disabled', false);
+                }
+            });
+        });
+    });
         $(window).scroll(function() {
             if ($(this).scrollTop() > 50) {
                 $('.navbar').addClass('scrolled');
