@@ -508,6 +508,13 @@ input#deslizador::-ms-tooltip {
         function beforeAfter() {
   document.getElementById('separador').style.width = document.getElementById('deslizador').value + "%";
 }
+document.querySelector('.btn-primary').addEventListener('click', function(event) {
+    event.preventDefault(); // Evita el salto brusco
+    document.querySelector('#servicios').scrollIntoView({
+        behavior: 'smooth' // Scroll suave
+    });
+});
+
 $(document).ready(function() {
     // Actualizar el contador de caracteres
     var maxChars = 500;
